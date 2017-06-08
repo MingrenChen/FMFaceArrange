@@ -1,4 +1,4 @@
-import inti
+from inti import*
 import os
 
 
@@ -6,12 +6,12 @@ import os
 if __name__ == "__main__":
     fm_filepath = r"C:\Users\Harru\Documents\Sports Interactive\Football Manager 2017\graphics\players"
     t = open(r"C:\Users\Harru\Documents\Sports Interactive\Football Manager 2017\graphics\players\template.xml",'r')
-    folder_list = os.listdir(fm_filepath)
+    files = os.listdir(fm_filepath)
+    folders_list = []
     photo_list = []
-    for folder in folder_list:
+    for folder in files:
         face_filepath = os.path.join(fm_filepath, folder)
-        for photo in os.listdir(face_filepath):
-            if photo[-3:] == 'png':
-                photo_list.append(Photo(photo,face_filepath))
-    template_list = t.readlines()
-    line = template_list[18].split('/')
+        if os.path.isdir(face_filepath):
+            folders_list.append(Folder(face_filepath))
+    for f in folders_list:
+        f.creat_config()
