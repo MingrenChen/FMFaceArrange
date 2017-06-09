@@ -1,6 +1,5 @@
-from inti import*
 import os
-
+from inti import*
 
 
 if __name__ == "__main__":
