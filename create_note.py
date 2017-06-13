@@ -1,6 +1,5 @@
-import os
 from inti import*
-
+import os
 
 if __name__ == "__main__":
     fm_filepath = r"C:\Users\Harru\Documents\Sports Interactive\Football Manager 2017\graphics\players"
@@ -12,4 +11,5 @@ if __name__ == "__main__":
         if os.path.isdir(face_filepath):
             folders_list.append(Folder(face_filepath))
     for f in folders_list:
-        f.creat_config()
+        f.write_txt()
+

@@ -12,7 +12,7 @@ class Photo:
         self.name = name
         self.path = path
         self.real_dir = os.path.join(path, name)
-        with Image.open(self.path) as img:
+        with Image.open(self.real_dir) as img:
             self.width, self.height = img.size
 
     def __repr__(self):
@@ -79,7 +79,20 @@ class Folder:
         config.writelines('/'.join(['\t</list>\n', '</record>']))
         config.close()
 
-
+    def write_txt(self):
+        """
+        write a txt file include the name of all photo.
+        :return: None
+        :rtype: None
+        """
+        if not os.path.isfile(os.path.join(self.path, 'note.txt')):
+            c = os.path.join(self.path, 'note.txt')
+            note = open(c, 'w')
+            for i in self.file:
+                note.write(i.name)
+                note.write("\t{},{}".format(i.width, i.height))
+                note.write("\n")
+            note.close()
 
 
 # with Image.open(fm_filepath) as img:

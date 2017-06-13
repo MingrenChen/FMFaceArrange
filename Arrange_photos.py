@@ -1,8 +1,7 @@
 from inti import*
 
 if __name__ == "__main__":
-    fm_filepath = r"C:\Users\Harru\Documents\
-    Sports Interactive\Football Manager 2017\graphics\players"
+    fm_filepath = r"C:\Users\Harru\Documents\Sports Interactive\Football Manager 2017\graphics\players"
     folder_list = os.listdir(fm_filepath)
     photo_list = []
     for folder in folder_list:
