@@ -6,10 +6,17 @@ if __name__ == "__main__":
     files = os.listdir(fm_filepath)
     folders_list = []
     photo_list = []
+<<<<<<< HEAD
     i = 0
+=======
+>>>>>>> 7c32a925f0833e30ee75e14fb10b13c095286e56
     for folder in files:
         face_filepath = os.path.join(fm_filepath, folder)
         if os.path.isdir(face_filepath):
             folders_list.append(Folder(face_filepath))
     for f in folders_list:
         f.write_txt()
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7c32a925f0833e30ee75e14fb10b13c095286e56

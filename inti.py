@@ -12,12 +12,17 @@ class Photo:
         self.name = name
         self.path = path
         self.real_dir = os.path.join(path, name)
+<<<<<<< HEAD
         if width != 0:
             with Image.open(self.real_dir) as img:
                 self.width, self.height = img.size
         else:
             self.width = width
             self.height = height
+=======
+        with Image.open(self.real_dir) as img:
+            self.width, self.height = img.size
+>>>>>>> 7c32a925f0833e30ee75e14fb10b13c095286e56
 
     def __repr__(self):
         return self.name
@@ -110,6 +115,7 @@ class Folder:
                 note.write("\n")
             note.close()
 
+<<<<<<< HEAD
     def include(self, photo):
         """
         return if a photo is in the folder.
@@ -125,3 +131,8 @@ class Folder:
             note = open(c, 'r')
             photo_list = note.readlines()
             print(photo_list)
+=======
+
+# with Image.open(fm_filepath) as img:
+#     width, height = img.size
+>>>>>>> 7c32a925f0833e30ee75e14fb10b13c095286e56
