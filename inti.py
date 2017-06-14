@@ -7,13 +7,17 @@ class Photo:
     """
     init a png file for fm players.
     """
-    def __init__(self, name, path):
+    def __init__(self, name, path, width=0, height=0):
         self.id_ = name[:-4]
         self.name = name
         self.path = path
         self.real_dir = os.path.join(path, name)
-        with Image.open(self.path) as img:
-            self.width, self.height = img.size
+        if width != 0:
+            with Image.open(self.real_dir) as img:
+                self.width, self.height = img.size
+        else:
+            self.width = width
+            self.height = height
 
     def __repr__(self):
         return self.name
@@ -38,9 +42,21 @@ class Folder:
         self.path = path
         self.name = os.path.basename(path)
         self.file = []
-        for file in os.listdir(path):
-            if file[-3:] == 'png':
-                self.file.append(Photo(file, path))
+        self.num = 0
+        if "note.txt" not in os.listdir(path):
+            print(123456)
+            for file in os.listdir(path):
+                if file[-3:] == 'png':
+                    self.file.append(Photo(file, path))
+                    self.num += 1
+        else:
+            note = open(os.path.join(path, "note.txt"), 'r')
+            for line in note.readlines():
+                width = int(line.split("\t")[1].split(",")[0])
+                height = int(line.split("\t")[1].split(",")[1])
+                self.file.append(Photo(os.path.join(path, line.split("\t")[0]), path, width, height))
+                self.num += 1
+            note.close()
 
     def __repr__(self):
         return self.name
@@ -79,8 +95,33 @@ class Folder:
         config.writelines('/'.join(['\t</list>\n', '</record>']))
         config.close()
 
+    def write_txt(self):
+        """
+        write a txt file include the name of all photo.
+        :return: None
+        :rtype: None
+        """
+        if not os.path.isfile(os.path.join(self.path, 'note.txt')):
+            c = os.path.join(self.path, 'note.txt')
+            note = open(c, 'w')
+            for i in self.file:
+                note.write(i.name)
+                note.write("\t{},{}".format(i.width, i.height))
+                note.write("\n")
+            note.close()
 
-
-
-# with Image.open(fm_filepath) as img:
-#     width, height = img.size
+    def include(self, photo):
+        """
+        return if a photo is in the folder.
+        :param photo: a photo's name
+        :type photo: Photo
+        :return: None
+        :rtype: None
+        """
+        if not os.path.isfile(os.path.join(self.path, 'note.txt')):
+            self.write_txt()
+        else:
+            c = os.path.join(self.path, 'note.txt')
+            note = open(c, 'r')
+            photo_list = note.readlines()
+            print(photo_list)
