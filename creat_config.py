@@ -7,6 +7,7 @@ if __name__ == "__main__":
     files = os.listdir(fm_filepath)
     folders_list = []
     photo_list = []
+
     for folder in files:
         face_filepath = os.path.join(fm_filepath, folder)
         if os.path.isdir(face_filepath):
